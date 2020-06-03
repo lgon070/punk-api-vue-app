@@ -1,0 +1,4 @@
+{
+    "searchUrl": "https://api.punkapi.com/v2/beers?beer_name=",
+    "fetchUrl": "https://api.punkapi.com/v2/beers/"
+}

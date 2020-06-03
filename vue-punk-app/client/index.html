@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Punk-I-Nator</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        #inner {
+            border: 3px solid gray;
+            width: 8%;
+            margin: 0 auto;
+        }
+
+        #outer {
+            margin: 0 auto;
+            width: 100%
+        }
+
+        #actions {
+            margin: 0 auto;
+            width: auto;
+        }
+
+        ul {
+            background: #E9ECEF;
+            padding: 20px;
+            margin: 5px;
+        }
+
+        ul li {
+            background: #ffffff;
+            padding: 5px;
+        }
+
+        button {
+            margin: auto;
+            display: block;
+        }
+
+        p {
+            margin: auto;
+            display: block;
+        }
+
+        #bImg {
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="punked" v-cloak>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg">
+                        <h1 class="display-2">Punk-I-Nator 3000</h1>
+                        <h4 class="lead">Leading the search for alcoholics everywhere! Search for a drink from the Punk
+                            API!</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-cloak class="container">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="row">
+                        <input type="text" class="form-control" placeholder="Search the Punk API" v-model="query"
+                            @keyup.enter="search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <section v-if="hasSearched && !hasSelected">
+            <div id="outer" class="row">
+                <div id="inner" class="row" v-for="drink in returnedBeverages">
+                    <h6 style="text-align: center; font-weight: bold;">{{drink.name}}</h6>
+                    <img v-bind:src="drink.image_url" />
+                    <input type="radio" v-model="selectedId" :value="drink.id" />
+                </div>
+            </div>
+        </section>
+
+        <section v-if="hasSelected">
+            <h1 style="text-align: center;">{{selectedBeverage.name}}</h1>
+            <h3 style="font-style: italic; text-align: center;">{{selectedBeverage.tagline}}</h3>
+            <p style="text-align: center;">This beverage was first brewed {{brewedForYears}} year(s) ago!</p>
+            <img id="bImg" v-bind:src="selectedBeverage.image_url" width="6%" />
+            <p style="text-align: center; width: 50%;">{{selectedBeverage.description}}</p>
+        </section>
+
+        <br>
+
+        <div id="actions" class="row">
+
+            <button v-if="hasSearched && !hasSelected" @click="fetch()" class="btn btn-dark">
+                Learn More
+            </button>
+            <button v-if="hasSearched && hasSelected" @click="retry" class="btn btn-dark">
+                Search Again?
+            </button>
+        </div>
+
+        <div v-if="beverageTracker.length && inMenu" class="col-lg-4">
+            <h6 style="font-weight: bold;">Previous Search Queries</h6>
+            <br>
+            <tracker v-bind:beverage-tracker="beverageTracker"></tracker>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js" type="text/javascript"></script>
+
+</body>
+
+</html>

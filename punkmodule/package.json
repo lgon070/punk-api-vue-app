@@ -1,0 +1,15 @@
+{
+  "name": "punkmodule",
+  "version": "1.0.0",
+  "description": "Module for Punk API Vue App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Gonzalez",
+  "license": "MIT",
+  "dependencies": {
+    "cli-color": "^2.0.0",
+    "superagent": "^5.2.2"
+  }
+}
